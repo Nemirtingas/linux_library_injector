@@ -84,18 +84,18 @@ class InjectorState_t
     size_t _FindDLOpenOffset(void* addr)
     {
         Dl_info info;
-    	struct stat buf;
+        struct stat buf;
  
-    	if(!dladdr(addr, &info))
-    		return false;
+        if(!dladdr(addr, &info))
+            return false;
  
-    	if(!info.dli_fbase || !info.dli_fname)
-    		return false;
+        if(!info.dli_fbase || !info.dli_fname)
+            return false;
  
-    	if(stat(info.dli_fname, &buf) != 0)
-    		return false;
+        if(stat(info.dli_fname, &buf) != 0)
+            return false;
  
-	    return (uintptr_t)addr - (uintptr_t)info.dli_fbase;
+        return (uintptr_t)addr - (uintptr_t)info.dli_fbase;
     }
 
     void* _FindRemoteProcessDLOpen(std::string const& pid)
